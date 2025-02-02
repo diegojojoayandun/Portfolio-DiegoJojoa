@@ -70,5 +70,5 @@ const Footer = () => {
   );
 };
 
-// Wrap Footer with SectionWrapper
+// Wrap Footer with SectionWrapper new editio of footer
 export default SectionWrapper(Footer, "footer");
