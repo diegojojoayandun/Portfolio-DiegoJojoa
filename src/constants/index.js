@@ -107,21 +107,28 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Junior Back-End Developer",
+    title: "Back-End Developer",
+    company_name: "Renova IM",
+    icon: c360,
+    iconBg: "#333333",
+    date: "May 2023 - May 2024",
+  },
+  {
+    title: "Back-End Developer",
     company_name: "Complemento",
     icon: c360,
     iconBg: "#333333",
     date: "May 2023 - May 2024",
   },
   {
-    title: "Back-End Developer (Volunteer)",
+    title: "Back-End Developer",
     company_name: "Holberton",
     icon: holberton,
     iconBg: "#333333",
     date: "Sep 2022 - Mar 2023",
   },
   {
-    title: "Junior Front-End Developer",
+    title: "Front-End Developer",
     company_name: "Devsu",
     icon: devsu,
     iconBg: "#333333",
