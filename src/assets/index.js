@@ -12,6 +12,7 @@ import backend from "./icons/backend.png";
 import ux from "./icons/ux.png";
 import frontend from "./icons/frontend.png";
 import prototyping from "./icons/prototyping.png";
+import cybersecurity from "./icons/cybersecurity.png";
 import github from "./icons/github.png";
 import close from "./icons/close.png";
 import download from "./icons/download.png";
@@ -72,6 +73,7 @@ export {
   ux,
   frontend,
   prototyping,
+  cybersecurity,
   github,
   close,
   download,

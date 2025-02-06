@@ -3,6 +3,7 @@ import {
   backend,
   ux,
   prototyping,
+  cybersecurity,
   javascript,
   html,
   css,
@@ -53,13 +54,14 @@ const services = [
     title: "Backend Developer",
     icon: backend,
   },
-  {
-    title: "Web Developer",
-    icon: ux,
-  },
+
   {
     title: "Cloud Architecture",
     icon: prototyping,
+  },
+  {
+    title: "Cybersecurity",
+    icon: cybersecurity,
   },
 ];
 
