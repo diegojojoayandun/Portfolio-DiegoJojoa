@@ -26,6 +26,7 @@ import {
   c360,
   devsu,
   holberton,
+  renovaim,
 } from "../assets";
 
 export const navLinks = [
@@ -107,11 +108,11 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Back-End Developer",
+    title: "Back-End Developer (Freelance)",
     company_name: "Renova IM",
-    icon: c360,
+    icon: renovaim,
     iconBg: "#333333",
-    date: "May 2023 - May 2024",
+    date: "January 2019 - December 2022",
   },
   {
     title: "Back-End Developer",

@@ -47,6 +47,7 @@ import gcp from "./tech/gcp.png";
 import c360 from "./company/c360.png";
 import holberton from "./company/holberton.png";
 import devsu from "./company/devsu.png";
+import renovaim from "./company/renovaim.png";
 
 import space from "./projects/space-hub.png";
 import portfolio from "./projects/portfolio.png";
@@ -108,4 +109,5 @@ export {
   c360,
   holberton,
   devsu,
+  renovaim,
 };
