@@ -1,7 +1,3 @@
-// Ball.jsx is no longer used as a standalone canvas component.
-// All ball rendering is handled inside Tech.jsx with a shared Canvas + View.
-// This file is kept for compatibility but BallCanvas is not used in Tech.jsx anymore.
-
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Decal, Float, OrbitControls, Preload, useTexture } from '@react-three/drei';
