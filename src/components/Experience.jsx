@@ -108,7 +108,7 @@ const Experience = () => {
                   const response = await fetch(blobUrl);
                   if (!response.ok) {
                     throw new Error(
-                      `Error al descargar el archivo: ${response.statusText}`
+                      `Error al descargar el archivo: ${response.statusText}`,
                     );
                   }
                   const blob = await response.blob();
@@ -123,7 +123,7 @@ const Experience = () => {
                 } catch (error) {
                   console.error(
                     "Error descargando el archivo desde Blob Storage de Vercel:",
-                    error
+                    error,
                   );
                 }
               }}
@@ -153,4 +153,4 @@ const Experience = () => {
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default SectionWrapper(Experience, "experience");

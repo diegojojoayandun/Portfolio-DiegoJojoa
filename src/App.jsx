@@ -7,6 +7,7 @@ import {
   Navbar,
   Tech,
   Projects,
+  Certifications,
   Footer,
 } from "./components";
 
@@ -28,6 +29,10 @@ const App = () => {
         </div>
 
         <Projects />
+
+        <div>
+          <Certifications />
+        </div>
 
         <div
           className="bg-experience bg-cover bg-center bg-no-repeat
