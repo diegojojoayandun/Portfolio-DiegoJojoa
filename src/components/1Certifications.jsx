@@ -1,9 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import * as pdfjsLib from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker?url";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 const certifications = [
   {
@@ -39,29 +35,54 @@ const PdfViewer = ({ file }) => {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(false);
 
-    const render = async () => {
+    const renderPdf = async () => {
+      setLoading(true);
+      setError(false);
       try {
-        const pdf = await pdfjsLib.getDocument(file).promise;
+        const pdfjsLib = await import("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
+          .replace("cdnjs.cloudflare.com", "cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build")
+          .replace("/pdf.min.js", "/pdf.min.js"));
+      } catch {}
+
+      try {
+        // Load pdf.js from CDN via script tag if not already loaded
+        if (!window.pdfjsLib) {
+          await new Promise((resolve, reject) => {
+            if (document.querySelector("#pdfjs-script")) {
+              resolve();
+              return;
+            }
+            const script = document.createElement("script");
+            script.id = "pdfjs-script";
+            script.src = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js";
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+        }
+
+        const pdf = await window.pdfjsLib.getDocument(file).promise;
         const page = await pdf.getPage(1);
+
         if (cancelled) return;
 
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const containerWidth = canvas.parentElement?.clientWidth || 380;
+        const containerWidth = canvas.parentElement?.clientWidth || 400;
         const viewport = page.getViewport({ scale: 1 });
         const scale = containerWidth / viewport.width;
-        const scaled = page.getViewport({ scale });
+        const scaledViewport = page.getViewport({ scale });
 
-        canvas.width = scaled.width;
-        canvas.height = scaled.height;
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
 
         await page.render({
           canvasContext: canvas.getContext("2d"),
-          viewport: scaled,
+          viewport: scaledViewport,
         }).promise;
 
         if (!cancelled) setLoading(false);
@@ -73,32 +94,27 @@ const PdfViewer = ({ file }) => {
       }
     };
 
-    render();
+    renderPdf();
     return () => { cancelled = true; };
   }, [file]);
 
   return (
-    <div
-      className="rounded-xl overflow-hidden border border-white/10 bg-[#0d0d1a] flex items-center justify-center"
-      style={{ minHeight: "320px" }}
-    >
+    <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0d0d1a] flex items-center justify-center" style={{ minHeight: "320px" }}>
       {loading && (
         <div className="flex flex-col items-center gap-2 text-[#a8a8c0]">
           <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
           </svg>
           <span className="text-xs">Cargando certificado...</span>
         </div>
       )}
       {error && (
-        <div className="flex flex-col items-center gap-3 text-[#a8a8c0] px-6 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <div className="flex flex-col items-center gap-2 text-[#a8a8c0] px-4 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
             <polyline points="14 2 14 8 20 8"/>
-            <line x1="9" y1="13" x2="15" y2="13"/>
-            <line x1="9" y1="17" x2="12" y2="17"/>
           </svg>
-          <span className="text-xs leading-relaxed">No se pudo cargar la vista previa.<br/>Usa "Ver completo" para abrir el certificado.</span>
+          <span className="text-xs">Usa "Ver completo" para abrir el certificado</span>
         </div>
       )}
       <canvas
@@ -149,6 +165,10 @@ const CertModal = ({ cert, onClose }) => {
     link.click();
   };
 
+  const handleView = () => {
+    window.open(cert.file, "_blank");
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -186,7 +206,7 @@ const CertModal = ({ cert, onClose }) => {
 
           <div className="flex gap-3 justify-end">
             <button
-              onClick={() => window.open(cert.file, "_blank")}
+              onClick={handleView}
               className="flex items-center gap-2 text-sm text-[#a8a8c0] border border-white/10 rounded-xl px-4 py-2 hover:bg-white/5 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
