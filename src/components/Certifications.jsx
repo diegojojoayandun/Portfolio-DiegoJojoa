@@ -124,9 +124,13 @@ const PdfViewer = ({ file }) => {
   );
 };
 
-const CertCard = ({ cert, onClick, index }) => (
+const CertCard = ({ cert, onClick, index, animate }) => (
   <motion.div
-    variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
+    variants={!animate ? fadeIn("right", "spring", 0.5 * index, 0.75) : undefined}
+    initial={animate ? { opacity: 0, x: 60 } : undefined}
+    animate={animate ? { opacity: 1, x: 0 } : undefined}
+    transition={animate ? { type: "spring", duration: 0.75, delay: 0.08 * index } : undefined}
+    exit={animate ? { opacity: 0, x: 60, transition: { duration: 0.3, delay: 0.05 * (index - 4) } } : undefined}
     whileHover={{ y: -6, transition: { duration: 0.2 } }}
     onClick={() => onClick(cert)}
     className="xs:w-[250px] w-full cursor-pointer rounded-[20px] p-5 flex flex-col gap-4 select-none border border-black/10 bg-white/80 shadow-card hover:shadow-lg transition-shadow duration-300"
@@ -224,11 +228,13 @@ const Certifications = () => {
         <h2 className="text-white font-bold text-4xl">Certifications.</h2>
       </motion.div>
 
-      <div className="mt-10 flex flex-wrap gap-7">
-        {visible.map((cert, i) => (
-          <CertCard key={cert.fileName} cert={cert} onClick={setSelected} index={i} />
-        ))}
-      </div>
+      <AnimatePresence>
+        <div className="mt-10 flex flex-wrap gap-7">
+          {visible.map((cert, i) => (
+            <CertCard key={cert.fileName} cert={cert} onClick={setSelected} index={i} animate={i >= INITIAL_COUNT} />
+          ))}
+        </div>
+      </AnimatePresence>
 
       {/* Show more / Show less */}
       {certifications.length > INITIAL_COUNT && (
