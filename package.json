@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emailjs/browser": "^3.11.0",
     "@react-three/drei": "^9.66.1",
     "@react-three/fiber": "^8.13.0",
     "bootstrap-icons": "^1.11.3",
