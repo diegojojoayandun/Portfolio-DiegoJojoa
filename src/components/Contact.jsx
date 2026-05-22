@@ -1,188 +1,101 @@
-import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
-import { send, sendHover } from "../assets";
-import Swal from "sweetalert2";
+
+const contacts = [
+  {
+    label: "Email",
+    value: "diegojojoa@email.com",
+    href: "mailto:diegojojoa@email.com",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    value: "diego-fernando-jojoa-yandun",
+    href: "https://www.linkedin.com/in/diego-fernando-jojoa-yandun/",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+        <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+      </svg>
+    ),
+  },
+  {
+    label: "GitHub",
+    value: "diegojojoayandun",
+    href: "https://github.com/diegojojoayandun",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S9 17.44 9 18v4"/>
+        <path d="M9 18c-4.51 2-5-2-7-2"/>
+      </svg>
+    ),
+  },
+  {
+    label: "WhatsApp",
+    value: "+57 (Colombia)",
+    href: "https://wa.me/57",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.1-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    ),
+  },
+];
+
+const ContactCard = ({ contact, index }) => (
+  <motion.a
+    href={contact.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    viewport={{ once: true }}
+    whileHover={{ y: -8, transition: { duration: 0.2 } }}
+    className="group flex flex-col gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
+  >
+    <div className="w-12 h-12 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
+      {contact.icon}
+    </div>
+    <div>
+      <p className="text-taupe text-xs uppercase tracking-widest mb-1">{contact.label}</p>
+      <p className="text-timberWolf font-medium text-sm leading-snug">{contact.value}</p>
+    </div>
+    <div className="flex items-center gap-2 text-taupe text-xs group-hover:text-timberWolf transition-colors duration-300">
+      <span>Get in touch</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform duration-200">
+        <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+      </svg>
+    </div>
+  </motion.a>
+);
 
 const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Check if any form fields are empty
-    if (!form.name || !form.email || !form.message) {
-      Swal.fire({
-        title: "Missing Information",
-        text: "Please fill in all fields before sending.",
-        icon: "warning",
-        showConfirmButton: true,
-        confirmButtonColor: "#630b57",
-        confirmButtonText: "Ok",
-      });
-      return; // Exit the function early
-    }
-    setLoading(true);
-
-    // sign up on emailjs.com (select the gmail service and connect your account).
-    //click on create a new template then click on save.
-    const ServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const TemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const UserId = import.meta.env.VITE_EMAILJS_USER_ID;
-    const ToName = import.meta.env.VITE_EMAILJS_TO_NAME;
-    const ToEmail = import.meta.env.VITE_EMAILJS_TO_EMAIL;
-
-    emailjs
-      .send(
-        ServiceId, // paste your ServiceID here (you'll get one when your service is created).
-        TemplateId, // paste your TemplateID here (you'll find it under email templates).
-        {
-          from_name: form.name,
-          to_name: ToName, // put your name here.
-          from_email: form.email,
-          to_email: ToEmail, //put your email here.
-          message: form.message,
-        },
-        UserId //paste your Public Key here. You'll get it in your profile section.
-      )
-      .then(
-        () => {
-          setLoading(false);
-          Swal.fire({
-            title: "¡Succesfull Send!",
-            text: "Thank you. I will get back to you as soon as possible.",
-            icon: "success",
-            showConfirmButton: true,
-            confirmButtonColor: "#630b57",
-            confirmButtonText: "Ok",
-          });
-
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.log(error);
-          Swal.fire({
-            title: "¡Not Send!",
-            text: "Something went wrong. Please try again.",
-            icon: "error",
-            showConfirmButton: true,
-            confirmButtonColor: "#630b57",
-            confirmButtonText: "Ok",
-          });
-        }
-      );
-  };
-
   return (
-    <div
-      className="-mt-[8rem] xl:flex-row flex-col-reverse
-      flex gap-10 overflow-hidden"
-    >
+    <div className="-mt-[8rem] flex flex-col gap-10 overflow-hidden">
       <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className="flex-[0.75] bg-jet p-8 rounded-2xl"
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true }}
       >
-        {/* <p className={styles.sectionSubText}>Get in touch</p> */}
         <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
-
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-6 font-poppins"
-        >
-          <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Name</span>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your name?"
-              className="bg-eerieBlack py-4 px-6
-              placeholder:text-taupe
-              text-timberWolf rounded-lg outline-none
-              border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Email</span>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What's your email?"
-              className="bg-eerieBlack py-4 px-6
-              placeholder:text-taupe
-              text-timberWolf rounded-lg outline-none
-              border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">
-              Your Message
-            </span>
-            <textarea
-              rows="7"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="What's your message?"
-              className="bg-eerieBlack py-4 px-6
-              placeholder:text-taupe
-              text-timberWolf rounded-lg outline-none
-              border-none font-medium resize-none"
-            />
-          </label>
-
-          <button
-            type="submit"
-            className="live-demo flex justify-center sm:gap-4
-            gap-3 sm:text-[20px] text-[16px] text-timberWolf
-            font-bold font-beckman items-center py-5
-            whitespace-nowrap sm:w-[130px] sm:h-[50px]
-            w-[100px] h-[45px] rounded-[10px] bg-night
-            hover:bg-battleGray hover:text-eerieBlack
-            transition duration-[0.2s] ease-in-out"
-            onMouseOver={() => {
-              document
-                .querySelector(".contact-btn")
-                .setAttribute("src", sendHover);
-            }}
-            onMouseOut={() => {
-              document.querySelector(".contact-btn").setAttribute("src", send);
-            }}
-          >
-            {loading ? "Sending" : "Send"}
-            <img
-              src={send}
-              alt="send"
-              className="contact-btn sm:w-[26px] sm:h-[26px]
-              w-[23px] h-[23px] object-contain"
-            />
-          </button>
-        </form>
+        <p className="text-taupe mt-2 text-sm">
+          Open to opportunities — let's build something together.
+        </p>
       </motion.div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {contacts.map((contact, i) => (
+          <ContactCard key={contact.label} contact={contact} index={i} />
+        ))}
+      </div>
     </div>
   );
 };
