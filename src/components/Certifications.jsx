@@ -27,10 +27,10 @@ const certifications = [
     fileName: "TalentoTech_Desarrollo_Web.pdf",
   },
   {
-    title: "Certificado Profesional Google CI/CD",
+    title: "Certificado Profesional Google Ciberseguridad",
     issuer: "Google",
-    file: "/certifications/CERTIFICADO_PROFESIONAL_GOOGLE_CI.pdf",
-    fileName: "Certificado_Profesional_Google_CICD.pdf",
+    file: "/certifications/CERTIFICADO_PROFESIONAL_GOOGLE_CIBERSEGURIDAD.pdf",
+    fileName: "CERTIFICADO_PROFESIONAL_GOOGLE_CIBERSEGURIDAD.pdf",
   },
 ];
 
