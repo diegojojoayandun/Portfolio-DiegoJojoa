@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "../hoc";
-import { fadeIn } from "../utils/motion";
+import { fadeIn, textVariant } from "../utils/motion";
 
 const socialLinks = [
   {
@@ -46,7 +46,9 @@ const MagneticIcon = ({ href, label, icon, index }) => {
   };
 
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.1, 0.6)}>
+    <motion.div
+      variants={fadeIn("up", "spring", index * 0.1, 0.6)}
+    >
       <motion.a
         ref={ref}
         href={href}
@@ -85,7 +87,13 @@ const Footer = () => {
     <footer id="footer">
       <div className="container flex flex-col items-center justify-center">
 
-        {/* Magnetic icons */}
+        {/* Divider — hereda stagger del SectionWrapper */}
+        <motion.div
+          variants={fadeIn("down", "tween", 0, 0.8)}
+          className="w-24 h-px bg-white/20 mb-8"
+        />
+
+        {/* Magnetic icons con stagger heredado */}
         <div className="social-links">
           {socialLinks.map((link, i) => (
             <MagneticIcon key={link.href} {...link} index={i} />
