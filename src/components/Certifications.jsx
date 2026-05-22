@@ -67,19 +67,36 @@ const PdfViewer = ({ file }) => {
 
         if (!cancelled) setLoading(false);
       } catch {
-        if (!cancelled) { setError(true); setLoading(false); }
+        if (!cancelled) {
+          setError(true);
+          setLoading(false);
+        }
       }
     };
 
     render();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [file]);
 
   return (
-    <div className="rounded-xl overflow-hidden border border-black/10 bg-[#f0f0f0] flex items-center justify-center" style={{ minHeight: "320px" }}>
+    <div
+      className="rounded-xl overflow-hidden border border-black/10 bg-[#f0f0f0] flex items-center justify-center"
+      style={{ minHeight: "320px" }}
+    >
       {loading && (
         <div className="flex flex-col items-center gap-2 text-[#555]">
-          <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            className="animate-spin"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M21 12a9 9 0 1 1-6.219-8.56" />
           </svg>
           <span className="text-xs">Cargando certificado...</span>
@@ -87,14 +104,28 @@ const PdfViewer = ({ file }) => {
       )}
       {error && (
         <div className="flex flex-col items-center gap-3 text-[#555] px-6 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
             <polyline points="14 2 14 8 20 8" />
           </svg>
-          <span className="text-xs leading-relaxed">Usa "Ver completo" para abrir el certificado.</span>
+          <span className="text-xs leading-relaxed">
+            Usa "Ver completo" para abrir el certificado.
+          </span>
         </div>
       )}
-      <canvas ref={canvasRef} className="w-full" style={{ display: loading || error ? "none" : "block" }} />
+      <canvas
+        ref={canvasRef}
+        className="w-full"
+        style={{ display: loading || error ? "none" : "block" }}
+      />
     </div>
   );
 };
@@ -107,7 +138,17 @@ const CertCard = ({ cert, onClick, index }) => (
     className="xs:w-[250px] w-full cursor-pointer rounded-[20px] p-5 flex flex-col gap-4 select-none border border-black/10 bg-white/80 shadow-card hover:shadow-lg transition-shadow duration-300"
   >
     <div className="w-11 h-11 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#e0e0e0"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="9" y1="13" x2="15" y2="13" />
@@ -115,11 +156,23 @@ const CertCard = ({ cert, onClick, index }) => (
       </svg>
     </div>
     <div className="flex flex-col gap-1">
-      <p className="text-[#1a1a1a] font-semibold text-sm leading-snug">{cert.title}</p>
+      <p className="text-[#1a1a1a] font-semibold text-sm leading-snug">
+        {cert.title}
+      </p>
       <p className="text-[#555] text-xs">{cert.issuer}</p>
     </div>
     <span className="inline-flex items-center gap-1 text-[11px] text-[#1a1a1a] bg-[#e8e8e8] border border-black/10 rounded-full px-2.5 py-1 w-fit font-medium">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="11"
+        height="11"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <polyline points="20 6 9 17 4 12" />
       </svg>
       Verificado
@@ -154,28 +207,73 @@ const CertModal = ({ cert, onClose }) => {
         >
           <div className="flex justify-between items-start">
             <div>
-              <h3 className="text-[#1a1a1a] font-semibold text-base leading-snug">{cert.title}</h3>
+              <h3 className="text-[#1a1a1a] font-semibold text-base leading-snug">
+                {cert.title}
+              </h3>
               <p className="text-[#555] text-sm mt-0.5">{cert.issuer}</p>
             </div>
-            <button onClick={onClose} className="text-[#555] hover:text-[#1a1a1a] transition-colors p-1 -mt-1 -mr-1" aria-label="Cerrar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            <button
+              onClick={onClose}
+              className="text-[#555] hover:text-[#1a1a1a] transition-colors p-1 -mt-1 -mr-1"
+              aria-label="Cerrar"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
           </div>
           <PdfViewer file={cert.file} />
           <div className="flex gap-3 justify-end">
-            <button onClick={() => window.open(cert.file, "_blank")} className="flex items-center gap-2 text-sm text-[#555] border border-black/15 rounded-xl px-4 py-2 hover:bg-[#f5f5f5] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button
+              onClick={() => window.open(cert.file, "_blank")}
+              className="flex items-center gap-2 text-sm text-[#555] border border-black/15 rounded-xl px-4 py-2 hover:bg-[#f5f5f5] transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
               Ver completo
             </button>
-            <button onClick={handleDownload} className="flex items-center gap-2 text-sm text-white bg-[#1a1a1a] rounded-xl px-4 py-2 hover:bg-[#333] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button
+              onClick={handleDownload}
+              className="flex items-center gap-2 text-sm text-white bg-[#1a1a1a] rounded-xl px-4 py-2 hover:bg-[#333] transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
               Descargar PDF
             </button>
@@ -192,7 +290,9 @@ const Certifications = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 py-16" id="certifications">
       <div className="mb-10">
-        <p className="text-[#a09d9d] text-sm uppercase tracking-widest mb-1">Lo que he logrado</p>
+        <p className="text-[#a09d9d] text-sm uppercase tracking-widest mb-1">
+          Lo que he logrado
+        </p>
         <h2 className="text-white font-bold text-4xl">Certificaciones.</h2>
       </div>
       <div className="mt-10 flex flex-wrap gap-7">
@@ -200,7 +300,9 @@ const Certifications = () => {
           <CertCard key={i} cert={cert} onClick={setSelected} index={i} />
         ))}
       </div>
-      {selected && <CertModal cert={selected} onClose={() => setSelected(null)} />}
+      {selected && (
+        <CertModal cert={selected} onClose={() => setSelected(null)} />
+      )}
     </section>
   );
 };
