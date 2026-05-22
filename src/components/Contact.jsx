@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
 
 const contacts = [
   {
@@ -54,18 +53,21 @@ const ContactCard = ({ contact, index }) => (
     href={contact.href}
     target="_blank"
     rel="noopener noreferrer"
-    variants={fadeIn("up", "spring", index * 0.1, 0.6)}
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    viewport={{ once: true }}
     whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    className="group flex flex-col gap-4 bg-white rounded-2xl p-6 border border-black/8 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer"
+    className="group flex flex-col gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
   >
-    <div className="w-12 h-12 rounded-xl bg-[#f0f0f0] flex items-center justify-center text-[#555] group-hover:bg-[#1a1a1a] group-hover:text-white transition-all duration-300">
+    <div className="w-12 h-12 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
       {contact.icon}
     </div>
     <div>
-      <p className="text-[#999] text-xs uppercase tracking-widest mb-1 font-poppins">{contact.label}</p>
-      <p className="text-[#1a1a1a] font-semibold text-sm leading-snug font-poppins">{contact.value}</p>
+      <p className="text-taupe text-xs uppercase tracking-widest mb-1">{contact.label}</p>
+      <p className="text-timberWolf font-medium text-sm leading-snug">{contact.value}</p>
     </div>
-    <div className="flex items-center gap-2 text-[#999] text-xs group-hover:text-[#1a1a1a] transition-colors duration-300 font-poppins">
+    <div className="flex items-center gap-2 text-taupe text-xs group-hover:text-timberWolf transition-colors duration-300">
       <span>Get in touch</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform duration-200">
         <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
@@ -77,9 +79,14 @@ const ContactCard = ({ contact, index }) => (
 const Contact = () => {
   return (
     <div className="-mt-[8rem] flex flex-col gap-10 overflow-hidden">
-      <motion.div variants={textVariant()}>
-        <h3 className={`${styles.sectionHeadText} text-[#1a1a1a]`}>Contact.</h3>
-        <p className="text-[#888] mt-2 text-sm font-poppins">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true }}
+      >
+        <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
+        <p className="text-taupe mt-2 text-sm">
           Open to opportunities — let's build something together.
         </p>
       </motion.div>
