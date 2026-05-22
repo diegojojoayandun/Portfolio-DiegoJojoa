@@ -64,6 +64,8 @@ const certifications = [
   },
 ];
 
+const INITIAL_COUNT = 4;
+
 const PdfViewer = ({ file }) => {
   const canvasRef = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -105,7 +107,7 @@ const PdfViewer = ({ file }) => {
           <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M21 12a9 9 0 1 1-6.219-8.56" />
           </svg>
-          <span className="text-xs">Cargando certificado...</span>
+          <span className="text-xs">Loading certificate...</span>
         </div>
       )}
       {error && (
@@ -114,7 +116,7 @@ const PdfViewer = ({ file }) => {
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
             <polyline points="14 2 14 8 20 8" />
           </svg>
-          <span className="text-xs leading-relaxed">Usa "Ver completo" para abrir el certificado.</span>
+          <span className="text-xs leading-relaxed">Use "View full" to open the certificate.</span>
         </div>
       )}
       <canvas ref={canvasRef} className="w-full" style={{ display: loading || error ? "none" : "block" }} />
@@ -180,7 +182,7 @@ const CertModal = ({ cert, onClose }) => {
               <h3 className="text-[#1a1a1a] font-semibold text-base leading-snug">{cert.title}</h3>
               <p className="text-[#555] text-sm mt-0.5">{cert.issuer}</p>
             </div>
-            <button onClick={onClose} className="text-[#555] hover:text-[#1a1a1a] transition-colors p-1 -mt-1 -mr-1" aria-label="Cerrar">
+            <button onClick={onClose} className="text-[#555] hover:text-[#1a1a1a] transition-colors p-1 -mt-1 -mr-1" aria-label="Close">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
               </svg>
@@ -211,6 +213,9 @@ const CertModal = ({ cert, onClose }) => {
 
 const Certifications = () => {
   const [selected, setSelected] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const visible = showAll ? certifications : certifications.slice(0, INITIAL_COUNT);
 
   return (
     <div className="mt-[-2rem]">
@@ -220,10 +225,39 @@ const Certifications = () => {
       </motion.div>
 
       <div className="mt-10 flex flex-wrap gap-7">
-        {certifications.map((cert, i) => (
-          <CertCard key={i} cert={cert} onClick={setSelected} index={i} />
+        {visible.map((cert, i) => (
+          <CertCard key={cert.fileName} cert={cert} onClick={setSelected} index={i} />
         ))}
       </div>
+
+      {/* Show more / Show less */}
+      {certifications.length > INITIAL_COUNT && (
+        <motion.div
+          variants={fadeIn("up", "tween", 0.4, 0.6)}
+          className="mt-10 flex justify-center"
+        >
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="flex items-center gap-2 text-sm text-timberWolf border border-white/20 rounded-xl px-6 py-3 hover:bg-white/10 transition-all duration-300 font-medium"
+          >
+            {showAll ? (
+              <>
+                Show less
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m18 15-6-6-6 6"/>
+                </svg>
+              </>
+            ) : (
+              <>
+                View all {certifications.length} certifications
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </>
+            )}
+          </button>
+        </motion.div>
+      )}
 
       {selected && <CertModal cert={selected} onClose={() => setSelected(null)} />}
     </div>
