@@ -105,15 +105,15 @@ const ContactCard = ({ contact, index }) => (
       {contact.icon}
     </div>
     <div>
-      <p className="text-taupe text-xs uppercase tracking-widest mb-1">
+      <p className="text-taupe text-xs uppercase tracking-widest mb-1 font-poppins">
         {contact.label}
       </p>
-      <p className="text-timberWolf font-medium text-sm leading-snug">
+      <p className="text-timberWolf font-medium text-sm leading-snug font-beckman tracking-[1px]">
         {contact.value}
       </p>
     </div>
     <div className="flex items-center gap-2 text-taupe text-xs group-hover:text-timberWolf transition-colors duration-300">
-      <span>Get in touch</span>
+      <span className="font-poppins">Get in touch</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="14"

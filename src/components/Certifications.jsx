@@ -144,8 +144,8 @@ const CertCard = ({ cert, onClick, index, animate }) => (
       </svg>
     </div>
     <div className="flex flex-col gap-1">
-      <p className="text-[#1a1a1a] font-semibold text-sm leading-snug">{cert.title}</p>
-      <p className="text-[#555] text-xs">{cert.issuer}</p>
+      <p className="text-[#1a1a1a] font-semibold text-sm leading-snug font-beckman tracking-[1px]">{cert.title}</p>
+      <p className="text-[#555] text-xs font-poppins">{cert.issuer}</p>
     </div>
     <span className="inline-flex items-center gap-1 text-[11px] text-[#1a1a1a] bg-[#e8e8e8] border border-black/10 rounded-full px-2.5 py-1 w-fit font-medium">
       <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
