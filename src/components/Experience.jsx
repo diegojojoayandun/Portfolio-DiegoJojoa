@@ -103,7 +103,7 @@ const Experience = () => {
               ease-in-out"
               onClick={async () => {
                 const blobUrl =
-                  "https://8unuhnavu44egppp.public.blob.vercel-storage.com/DEV_DIEGO_FERNANDO_JOJOA_YANDUN-xiS4fNgI3lUVpGDbDt8yoWEkDJGYX3.pdf"; // Coloca aquí la URL del blob de Vercel
+                  "https://8unuhnavu44egppp.public.blob.vercel-storage.com/CV_Diego_Fernando_Jojoa_2026.pdf"; // Coloca aquí la URL del blob de Vercel
                 try {
                   const response = await fetch(blobUrl);
                   if (!response.ok) {
@@ -115,7 +115,7 @@ const Experience = () => {
                   const url = window.URL.createObjectURL(blob);
                   const a = document.createElement("a");
                   a.href = url;
-                  a.download = "Dev-DiegoFernandoJojoa.pdf"; // Nombre del archivo para descargar
+                  a.download = "CV-DiegoFernandoJojoa.pdf"; // Nombre del archivo para descargar
                   document.body.appendChild(a);
                   a.click();
                   a.remove();
