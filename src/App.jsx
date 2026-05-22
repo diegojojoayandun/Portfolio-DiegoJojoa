@@ -11,9 +11,12 @@ import {
   Footer,
 } from "./components";
 
+import CustomCursor from "./components/CustomCursor";
+
 const App = () => {
   return (
     <BrowserRouter>
+      <CustomCursor />
       <div className="relative z-0">
         <div>
           <Navbar />
