@@ -1,114 +1,99 @@
 import { useEffect, useRef, useState } from "react";
 
+const isTouchDevice = () =>
+  typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
 const CustomCursor = () => {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
-  const mouseX = useRef(window.innerWidth / 2);
-  const mouseY = useRef(window.innerHeight / 2);
-  const ringX = useRef(window.innerWidth / 2);
-  const ringY = useRef(window.innerHeight / 2);
+  const pos = useRef({ x: -100, y: -100 });
+  const ring = useRef({ x: -100, y: -100 });
   const rafRef = useRef(null);
   const [hovering, setHovering] = useState(false);
-  const [visible, setVisible] = useState(false);
   const [clicking, setClicking] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (isTouchDevice()) return;
 
-    const onMove = (e) => {
-      mouseX.current = e.clientX;
-      mouseY.current = e.clientY;
+    const move = (e) => {
+      pos.current = { x: e.clientX, y: e.clientY };
       setVisible(true);
+    };
+
+    const over = (e) => {
+      setHovering(!!e.target.closest("a, button, [role='button']"));
+    };
+
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseover", over);
+    document.addEventListener("mousedown", () => setClicking(true));
+    document.addEventListener("mouseup", () => setClicking(false));
+    document.addEventListener("mouseleave", () => setVisible(false));
+    document.addEventListener("mouseenter", () => setVisible(true));
+
+    const tick = () => {
+      ring.current.x += (pos.current.x - ring.current.x) * 0.12;
+      ring.current.y += (pos.current.y - ring.current.y) * 0.12;
+
       if (dotRef.current) {
-        dotRef.current.style.left = e.clientX + "px";
-        dotRef.current.style.top = e.clientY + "px";
+        dotRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
       }
-    };
-
-    const onOver = (e) => {
-      const interactive = e.target.closest("a, button, [role='button'], input, textarea, select");
-      setHovering(!!interactive);
-    };
-
-    const onDown = () => setClicking(true);
-    const onUp = () => setClicking(false);
-    const onLeave = () => setVisible(false);
-    const onEnter = () => setVisible(true);
-
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseover", onOver);
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("mouseup", onUp);
-    document.documentElement.addEventListener("mouseleave", onLeave);
-    document.documentElement.addEventListener("mouseenter", onEnter);
-
-    const animate = () => {
-      ringX.current += (mouseX.current - ringX.current) * 0.1;
-      ringY.current += (mouseY.current - ringY.current) * 0.1;
       if (ringRef.current) {
-        ringRef.current.style.left = ringX.current + "px";
-        ringRef.current.style.top = ringY.current + "px";
+        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px)`;
       }
-      rafRef.current = requestAnimationFrame(animate);
+      rafRef.current = requestAnimationFrame(tick);
     };
-    rafRef.current = requestAnimationFrame(animate);
+    rafRef.current = requestAnimationFrame(tick);
 
     return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseover", onOver);
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("mouseup", onUp);
-      document.documentElement.removeEventListener("mouseleave", onLeave);
-      document.documentElement.removeEventListener("mouseenter", onEnter);
+      document.removeEventListener("mousemove", move);
+      document.removeEventListener("mouseover", over);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
-  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-    return null;
-  }
-
-  const dotSize = clicking ? 6 : 8;
-  const ringSize = hovering ? 60 : clicking ? 28 : 40;
+  if (isTouchDevice()) return null;
 
   return (
     <>
-      {/* Dot */}
+      {/* Dot — sharp, exact */}
       <div
         ref={dotRef}
         style={{
           position: "fixed",
-          width: dotSize + "px",
-          height: dotSize + "px",
+          top: "-4px",
+          left: "-4px",
+          width: clicking ? "6px" : "8px",
+          height: clicking ? "6px" : "8px",
           borderRadius: "50%",
-          background: "white",
+          background: hovering ? "#fff" : "#fff",
           pointerEvents: "none",
-          zIndex: 999999,
+          zIndex: 2147483647,
           opacity: visible ? 1 : 0,
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.1s, height 0.1s, opacity 0.3s",
+          transition: "opacity 0.2s, width 0.1s, height 0.1s",
+          willChange: "transform",
           mixBlendMode: "difference",
-          top: 0,
-          left: 0,
         }}
       />
-      {/* Ring */}
+
+      {/* Ring — lagged */}
       <div
         ref={ringRef}
         style={{
           position: "fixed",
-          width: ringSize + "px",
-          height: ringSize + "px",
+          top: hovering ? "-30px" : clicking ? "-14px" : "-20px",
+          left: hovering ? "-30px" : clicking ? "-14px" : "-20px",
+          width: hovering ? "60px" : clicking ? "28px" : "40px",
+          height: hovering ? "60px" : clicking ? "28px" : "40px",
           borderRadius: "50%",
-          border: "1.5px solid white",
+          border: "1.5px solid #fff",
           pointerEvents: "none",
-          zIndex: 999998,
-          opacity: visible ? 0.8 : 0,
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.35s cubic-bezier(0.22,1,0.36,1), height 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.3s",
+          zIndex: 2147483646,
+          opacity: visible ? 0.85 : 0,
+          transition: "opacity 0.2s, width 0.4s cubic-bezier(0.22,1,0.36,1), height 0.4s cubic-bezier(0.22,1,0.36,1), top 0.4s cubic-bezier(0.22,1,0.36,1), left 0.4s cubic-bezier(0.22,1,0.36,1)",
+          willChange: "transform",
           mixBlendMode: "difference",
-          top: 0,
-          left: 0,
         }}
       />
     </>
