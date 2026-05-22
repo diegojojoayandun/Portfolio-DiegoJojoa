@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
+import { SectionWrapper } from "../hoc";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker?url";
 
@@ -48,23 +49,18 @@ const PdfViewer = ({ file }) => {
         const pdf = await pdfjsLib.getDocument(file).promise;
         const page = await pdf.getPage(1);
         if (cancelled) return;
-
         const canvas = canvasRef.current;
         if (!canvas) return;
-
         const containerWidth = canvas.parentElement?.clientWidth || 380;
         const viewport = page.getViewport({ scale: 1 });
         const scale = containerWidth / viewport.width;
         const scaled = page.getViewport({ scale });
-
         canvas.width = scaled.width;
         canvas.height = scaled.height;
-
         await page.render({
           canvasContext: canvas.getContext("2d"),
           viewport: scaled,
         }).promise;
-
         if (!cancelled) setLoading(false);
       } catch {
         if (!cancelled) {
@@ -288,23 +284,25 @@ const Certifications = () => {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16" id="certifications">
-      <div className="mb-10">
+    <div className="mt-[-2rem]">
+      <motion.div variants={textVariant()}>
         <p className="text-[#a09d9d] text-sm uppercase tracking-widest mb-1">
-          Lo que he logrado
+          Certified & Verified
         </p>
-        <h2 className="text-white font-bold text-4xl">Certificaciones.</h2>
-      </div>
+        <h2 className="text-white font-bold text-4xl">Credentials.</h2>
+      </motion.div>
+
       <div className="mt-10 flex flex-wrap gap-7">
         {certifications.map((cert, i) => (
           <CertCard key={i} cert={cert} onClick={setSelected} index={i} />
         ))}
       </div>
+
       {selected && (
         <CertModal cert={selected} onClose={() => setSelected(null)} />
       )}
-    </section>
+    </div>
   );
 };
 
-export default Certifications;
+export default SectionWrapper(Certifications, "certifications");
