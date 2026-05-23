@@ -68,8 +68,6 @@ const Experience = () => {
           {experiences.map((experience, index) => (
             <ExperienceCard key={index} experience={experience} />
           ))}
-
-          {/* Resume download */}
           <VerticalTimelineElement
             contentStyle={{
               background: "#eaeaec",
@@ -150,23 +148,23 @@ const Experience = () => {
             </button>
           </VerticalTimelineElement>
 
-          {/* Closing dot */}
+          {/* Timeline closing element */}
           <VerticalTimelineElement
             iconStyle={{
               background: "#1a1a1a",
-              border: "2px solid #666",
-              boxShadow: "none",
+              border: "2px solid #888",
+              boxShadow: "0 0 0 4px rgba(136,136,136,0.2)",
+              width: "16px",
+              height: "16px",
+              marginLeft: "-8px",
+              marginTop: "8px",
             }}
-            icon={<></>}
             date={
               <span className="text-dim text-[14px] font-beckman tracking-[1px]">
                 2025 — Present
               </span>
             }
-          >
-            <></>
-          </VerticalTimelineElement>
-
+          />
         </VerticalTimeline>
       </div>
     </>
