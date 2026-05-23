@@ -15,10 +15,12 @@ const ContactCard = ({ contact, index }) => {
   return (
     <motion.a
       href={contact.href} target="_blank" rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      viewport={{ once: true }} whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true }}
       className="group flex flex-col items-center text-center gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
+      initial={{ opacity: 0, y: 40, boxShadow: "0 0 0px 0px rgba(255,255,255,0)" }}
+      whileInView={{ opacity: 1, y: 0, boxShadow: "0 0 20px 3px rgba(255,255,255,0.09), 0 0 50px 10px rgba(255,255,255,0.04)" }}
+      whileHover={{ y: -8, boxShadow: "0 0 30px 8px rgba(255,255,255,0.15), 0 0 70px 20px rgba(255,255,255,0.07)", transition: { duration: 0.3 } }}
     >
       <div className="w-12 h-12 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
         {contact.icon}
