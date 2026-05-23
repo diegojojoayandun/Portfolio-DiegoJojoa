@@ -24,17 +24,17 @@
 
 ## 🚀 Stack
 
-| Categoría | Tecnología |
-|---|---|
-| Framework | React 18 + Vite 4 |
-| Animaciones | Framer Motion 10 |
-| 3D | Three.js + @react-three/fiber + @react-three/drei |
-| Estilos | TailwindCSS 3 |
-| PDF Viewer | pdfjs-dist 5 |
-| i18n | react-i18next + i18next-browser-languagedetector |
-| Deploy | Vercel (Static Build) |
-| Dominio | GoDaddy → diegojojoayandun.site |
-| CV Storage | Vercel Blob Storage |
+| Categoría   | Tecnología                                        |
+| ----------- | ------------------------------------------------- |
+| Framework   | React 18 + Vite 4                                 |
+| Animaciones | Framer Motion 10                                  |
+| 3D          | Three.js + @react-three/fiber + @react-three/drei |
+| Estilos     | TailwindCSS 3                                     |
+| PDF Viewer  | pdfjs-dist 5                                      |
+| i18n        | react-i18next + i18next-browser-languagedetector  |
+| Deploy      | Vercel (Static Build)                             |
+| Dominio     | GoDaddy → diegojojoayandun.site                   |
+| CV Storage  | Vercel Blob Storage                               |
 
 ---
 
@@ -92,14 +92,14 @@ El portafolio detecta automáticamente el idioma del navegador y renderiza en **
 
 Headers HTTP configurados en `vercel.json`:
 
-| Header | Valor |
-|---|---|
-| `Content-Security-Policy` | script-src sin unsafe-eval, font-src restringido |
-| `Strict-Transport-Security` | max-age=63072000; includeSubDomains; preload |
-| `X-Frame-Options` | DENY |
-| `X-Content-Type-Options` | nosniff |
-| `Referrer-Policy` | strict-origin-when-cross-origin |
-| `Permissions-Policy` | camera, mic, geolocation, payment bloqueados |
+| Header                      | Valor                                            |
+| --------------------------- | ------------------------------------------------ |
+| `Content-Security-Policy`   | script-src sin unsafe-eval, font-src restringido |
+| `Strict-Transport-Security` | max-age=63072000; includeSubDomains; preload     |
+| `X-Frame-Options`           | DENY                                             |
+| `X-Content-Type-Options`    | nosniff                                          |
+| `Referrer-Policy`           | strict-origin-when-cross-origin                  |
+| `Permissions-Policy`        | camera, mic, geolocation, payment bloqueados     |
 
 **Score de seguridad: A** (verificado con securityheaders.com)
 
@@ -121,7 +121,7 @@ Headers HTTP configurados en `vercel.json`:
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/diegojojoayandun/Portfolio-Template.git
+git clone https://github.com/diegojojoayandun/Portfolio-DiegoJojoa.git
 cd Portfolio-Template
 
 # Instalar dependencias
@@ -140,11 +140,18 @@ El proyecto está configurado para deploy estático con Vite:
 ```json
 {
   "framework": "vite",
-  "builds": [{ "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }]
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ]
 }
 ```
 
 **Pasos:**
+
 1. Conecta el repositorio en [vercel.com](https://vercel.com)
 2. Vercel detecta automáticamente la configuración
 3. Configura las variables de entorno si es necesario

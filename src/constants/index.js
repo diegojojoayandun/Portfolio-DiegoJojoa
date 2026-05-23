@@ -170,7 +170,7 @@ const projects = [
       },
     ],
     image: portfolio,
-    repo: "https://github.com/diegojojoayandun/Portfolio-Template",
+    repo: "https://github.com/diegojojoayandun/Portfolio-DiegoJojoa",
   },
   {
     id: "project-1",
