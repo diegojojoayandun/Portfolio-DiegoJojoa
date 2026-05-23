@@ -103,7 +103,7 @@ const Experience = () => {
               ease-in-out"
               onClick={async () => {
                 const blobUrl =
-                  "https://8unuhnavu44egppp.public.blob.vercel-storage.com/CV_Diego_Fernando_Jojoa_2026.pdf";
+                  "https://8unuhnavu44egppp.public.blob.vercel-storage.com/CV_Diego_Fernando_Jojoa_2026.pdf"; // Coloca aquí la URL del blob de Vercel
                 try {
                   const response = await fetch(blobUrl);
                   if (!response.ok) {
@@ -115,7 +115,7 @@ const Experience = () => {
                   const url = window.URL.createObjectURL(blob);
                   const a = document.createElement("a");
                   a.href = url;
-                  a.download = "CV-DiegoFernandoJojoa.pdf";
+                  a.download = "CV-DiegoFernandoJojoa.pdf"; // Nombre del archivo para descargar
                   document.body.appendChild(a);
                   a.click();
                   a.remove();
@@ -147,24 +147,6 @@ const Experience = () => {
               />
             </button>
           </VerticalTimelineElement>
-
-          {/* Timeline closing element */}
-          <VerticalTimelineElement
-            iconStyle={{
-              background: "#1a1a1a",
-              border: "2px solid #888",
-              boxShadow: "0 0 0 4px rgba(136,136,136,0.2)",
-              width: "16px",
-              height: "16px",
-              marginLeft: "-8px",
-              marginTop: "8px",
-            }}
-            date={
-              <span className="text-dim text-[14px] font-beckman tracking-[1px]">
-                2025 — Present
-              </span>
-            }
-          />
         </VerticalTimeline>
       </div>
     </>
