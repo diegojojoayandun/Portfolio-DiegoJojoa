@@ -133,28 +133,26 @@ const CertCard = ({ cert, onClick, index, animate }) => (
     exit={animate ? { opacity: 0, x: 60, transition: { duration: 0.3, delay: 0.05 * (index - 4) } } : undefined}
     whileHover={{ y: -6, transition: { duration: 0.2 } }}
     onClick={() => onClick(cert)}
-    className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card cursor-pointer select-none"
+    className="xs:w-[250px] w-full cursor-pointer rounded-[20px] p-5 flex flex-col gap-4 select-none border border-black/10 bg-white/80 shadow-card hover:shadow-lg transition-shadow duration-300"
   >
-    <div className="bg-jetLight rounded-[20px] py-5 px-8 min-h-[200px] flex flex-col justify-evenly gap-3">
-      <div className="w-11 h-11 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <line x1="9" y1="13" x2="15" y2="13" />
-          <line x1="9" y1="17" x2="12" y2="17" />
-        </svg>
-      </div>
-      <div className="flex flex-col gap-1">
-        <p className="text-taupe font-semibold text-sm leading-snug font-beckman tracking-[1px]">{cert.title}</p>
-        <p className="text-dim text-xs font-poppins">{cert.issuer}</p>
-      </div>
-      <span className="inline-flex items-center gap-1 text-[11px] text-taupe bg-jetLight border border-white/10 rounded-full px-2.5 py-1 w-fit font-medium">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-        Verified
-      </span>
+    <div className="w-11 h-11 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="9" y1="13" x2="15" y2="13" />
+        <line x1="9" y1="17" x2="12" y2="17" />
+      </svg>
     </div>
+    <div className="flex flex-col gap-1">
+      <p className="text-[#1a1a1a] font-semibold text-sm leading-snug font-beckman tracking-[1px]">{cert.title}</p>
+      <p className="text-[#555] text-xs font-poppins">{cert.issuer}</p>
+    </div>
+    <span className="inline-flex items-center gap-1 text-[11px] text-[#1a1a1a] bg-[#e8e8e8] border border-black/10 rounded-full px-2.5 py-1 w-fit font-medium">
+      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      Verified
+    </span>
   </motion.div>
 );
 
