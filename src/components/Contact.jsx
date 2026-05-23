@@ -99,37 +99,38 @@ const ContactCard = ({ contact, index }) => (
     transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     viewport={{ once: true }}
     whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    className="group flex flex-col items-center text-center gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
-    style={{ boxShadow: "0 8px 40px 0 rgba(255,255,255,0.08), 0 2px 12px 0 rgba(255,255,255,0.05)" }}
+    className="group card-gradient p-[1px] rounded-[20px] shadow-card cursor-pointer"
   >
-    <div className="w-14 h-14 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300 mx-auto">
-      {contact.icon}
-    </div>
-    <div>
-      <p className="text-taupe text-xs uppercase tracking-widest mb-1 font-poppins">
-        {contact.label}
-      </p>
-      <p className="text-timberWolf font-medium text-sm leading-snug font-beckman tracking-[1px]">
-        {contact.value}
-      </p>
-    </div>
-    <div className="flex items-center gap-2 text-taupe text-xs group-hover:text-timberWolf transition-colors duration-300">
-      <span className="font-poppins">Get in touch</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="group-hover:translate-x-1 transition-transform duration-200"
-      >
-        <path d="M5 12h14" />
-        <path d="m12 5 7 7-7 7" />
-      </svg>
+    <div className="bg-jetLight rounded-[20px] py-5 px-8 min-h-[200px] flex flex-col justify-evenly items-center text-center gap-3">
+      <div className="w-14 h-14 rounded-xl bg-[#1a1a1a] flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
+        {contact.icon}
+      </div>
+      <div>
+        <p className="text-dim text-xs uppercase tracking-widest mb-1 font-poppins">
+          {contact.label}
+        </p>
+        <p className="text-taupe font-medium text-sm leading-snug font-beckman tracking-[1px]">
+          {contact.value}
+        </p>
+      </div>
+      <div className="flex items-center gap-2 text-dim text-xs group-hover:text-timberWolf transition-colors duration-300">
+        <span className="font-poppins">Get in touch</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="group-hover:translate-x-1 transition-transform duration-200"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </div>
     </div>
   </motion.a>
 );
