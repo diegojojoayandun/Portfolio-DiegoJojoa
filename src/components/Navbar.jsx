@@ -1,43 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { close, menu, logo } from "../assets";
-
-const LangToggle = () => {
-  const { i18n } = useTranslation();
-  const current = i18n.language?.startsWith("es") ? "es" : "en";
-
-  const toggle = () => {
-    i18n.changeLanguage(current === "en" ? "es" : "en");
-  };
-
-  return (
-    <button
-      onClick={toggle}
-      className="flex items-center gap-1 text-[13px] font-medium font-poppins
-        text-eerieBlack hover:text-taupe transition-colors duration-200
-        border border-eerieBlack/20 rounded-full px-3 py-1 hover:border-taupe"
-      aria-label="Toggle language"
-    >
-      <span>{current === "en" ? "🇬🇧 EN" : "🇨🇴 ES"}</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-  );
-};
+import { close, menu, logo, logotext } from "../assets";
 
 const Navbar = () => {
-  const { t } = useTranslation();
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-
-  const translatedLinks = navLinks.map((nav) => ({
-    ...nav,
-    title: t(`nav.${nav.id}`, nav.title),
-  }));
 
   return (
     <nav
@@ -59,9 +28,8 @@ const Navbar = () => {
             className="xs:w-[40px] xs:h-[40px] sm:w-[50px] sm:h-[50px] w-[45px] h-[45px] object-contain"
           />
         </Link>
-
-        <ul className="list-none hidden sm:flex flex-row gap-10 mt-2 items-center">
-          {translatedLinks.map((nav) => (
+        <ul className="list-none hidden sm:flex flex-row gap-14 mt-2">
+          {navLinks.map((nav) => (
             <li
               key={nav.id}
               className={`${
@@ -73,12 +41,10 @@ const Navbar = () => {
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
-          <li><LangToggle /></li>
         </ul>
 
         {/* mobile */}
-        <div className="sm:hidden flex flex-1 w-screen justify-end items-center gap-3">
-          <LangToggle />
+        <div className="sm:hidden flex flex-1 w-screen justify-end items-center">
           {toggle ? (
             <div
               className={`p-6 bg-flashWhite opacity-[0.98] absolute
@@ -95,7 +61,7 @@ const Navbar = () => {
                 />
               </div>
               <ul className="list-none flex flex-col gap-6 items-start justify-end mt-16 ml-4">
-                {translatedLinks.map((nav) => (
+                {navLinks.map((nav) => (
                   <li
                     key={nav.id}
                     style={{ fontSize: "15px" }}
