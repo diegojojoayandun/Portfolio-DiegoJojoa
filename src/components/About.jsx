@@ -40,11 +40,11 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]"
       >
-        <b>Software Developer</b> with over 3 years of experience in{" "}
+        <b>Software Developer</b> with over <b>5</b> years of experience in{" "}
         <b>backend</b> development, specializing in <b>.NET and Python</b>.
         Experienced in developing robust, secure, and scalable applications, as
         well as in API integration, database optimization, and cloud
-        deployments. Strong knowledge of agile methodologies, unit testing, and
+        deployments. Strong knowledge of agile methodologies, Cybersecurity, and
         best development practices. Committed to continuous learning and
         constant improvement.
       </motion.p>
