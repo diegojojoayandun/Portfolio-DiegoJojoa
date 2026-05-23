@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "about": "About",
+    "tech": "Tech",
+    "projects": "Projects",
+    "experience": "Experience",
+    "certs": "Certs",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "subtitle1": "Fullstack Developer.",
+    "subtitle2": ".NET and Python."
+  },
+  "about": {
+    "title": "Profile.",
+    "bio": "<b>Software Developer</b> with over <b>5</b> years of experience in <b>backend</b> development, specializing in <b>.NET and Python</b>. Experienced in developing robust, secure, and scalable applications, as well as in API integration, database optimization, and cloud deployments. Strong knowledge of agile methodologies, Cybersecurity, and best development practices. Committed to continuous learning and constant improvement.",
+    "services": {
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer",
+      "cloud": "Cloud Architecture",
+      "security": "Cybersecurity"
+    }
+  },
+  "tech": {
+    "subtitle": "My skills",
+    "title": "Technologies."
+  },
+  "projects": {
+    "title": "Projects.",
+    "description": "These are some personal and professional projects, including brief descriptions and links to <b>GitHub</b> repositories. They showcase my ability to tackle problems, provide solutions using various technologies, and efficiently manage projects."
+  },
+  "experience": {
+    "title": "Work Experience.",
+    "resume": "MY RESUME",
+    "present": "2025 — Present"
+  },
+  "certifications": {
+    "subtitle": "Certified & Verified",
+    "title": "Certifications.",
+    "verified": "Verified",
+    "viewFull": "View full",
+    "download": "Download PDF",
+    "loading": "Loading certificate...",
+    "error": "Use \"View full\" to open the certificate.",
+    "viewAll": "View all {{count}} certifications",
+    "showLess": "Show less"
+  },
+  "contact": {
+    "title": "Contact.",
+    "subtitle": "Open to opportunities — let's build something together.",
+    "getInTouch": "Get in touch"
+  },
+  "footer": {
+    "designBy": "Design by"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "about": "Perfil",
+    "tech": "Tech",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "certs": "Certs",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "subtitle1": "Desarrollador Fullstack.",
+    "subtitle2": ".NET y Python."
+  },
+  "about": {
+    "title": "Perfil.",
+    "bio": "<b>Desarrollador de Software</b> con más de <b>5</b> años de experiencia en desarrollo <b>backend</b>, especializado en <b>.NET y Python</b>. Con experiencia en el desarrollo de aplicaciones robustas, seguras y escalables, así como en integración de APIs, optimización de bases de datos y despliegues en la nube. Sólido conocimiento en metodologías ágiles, Ciberseguridad y mejores prácticas de desarrollo. Comprometido con el aprendizaje continuo y la mejora constante.",
+    "services": {
+      "frontend": "Desarrollador Frontend",
+      "backend": "Desarrollador Backend",
+      "cloud": "Arquitectura Cloud",
+      "security": "Ciberseguridad"
+    }
+  },
+  "tech": {
+    "subtitle": "Mis habilidades",
+    "title": "Tecnologías."
+  },
+  "projects": {
+    "title": "Proyectos.",
+    "description": "Estos son algunos proyectos personales y profesionales, con breves descripciones y enlaces a repositorios de <b>GitHub</b>. Demuestran mi capacidad para resolver problemas, proveer soluciones usando diversas tecnologías y gestionar proyectos eficientemente."
+  },
+  "experience": {
+    "title": "Experiencia Laboral.",
+    "resume": "MI HOJA DE VIDA",
+    "present": "2025 — Presente"
+  },
+  "certifications": {
+    "subtitle": "Certificado y Verificado",
+    "title": "Certificaciones.",
+    "verified": "Verificado",
+    "viewFull": "Ver completo",
+    "download": "Descargar PDF",
+    "loading": "Cargando certificado...",
+    "error": "Usa \"Ver completo\" para abrir el certificado.",
+    "viewAll": "Ver las {{count}} certificaciones",
+    "showLess": "Ver menos"
+  },
+  "contact": {
+    "title": "Contacto.",
+    "subtitle": "Abierto a oportunidades — construyamos algo juntos.",
+    "getInTouch": "Contáctame"
+  },
+  "footer": {
+    "designBy": "Diseño por"
+  }
+}
