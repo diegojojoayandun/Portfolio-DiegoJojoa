@@ -133,8 +133,7 @@ const CertCard = ({ cert, onClick, index, animate }) => (
     exit={animate ? { opacity: 0, x: 60, transition: { duration: 0.3, delay: 0.05 * (index - 4) } } : undefined}
     whileHover={{ y: -6, transition: { duration: 0.2 } }}
     onClick={() => onClick(cert)}
-    className="xs:w-[250px] w-full cursor-pointer rounded-[20px] p-5 flex flex-col gap-4 select-none border border-black/10 bg-white/80 transition-shadow duration-300"
-    style={{ boxShadow: "0 4px 24px 0 rgba(0,0,0,0.18), 0 1.5px 6px 0 rgba(0,0,0,0.10)" }}
+    className="xs:w-[250px] w-full cursor-pointer rounded-[20px] p-5 flex flex-col gap-4 select-none border border-black/10 bg-white/80 shadow-card hover:shadow-lg transition-shadow duration-300"
   >
     <div className="w-11 h-11 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

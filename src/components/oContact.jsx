@@ -99,10 +99,9 @@ const ContactCard = ({ contact, index }) => (
     transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     viewport={{ once: true }}
     whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    className="group flex flex-col items-center text-center gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
-    style={{ boxShadow: "0 4px 24px 0 rgba(0,0,0,0.35), 0 1.5px 6px 0 rgba(0,0,0,0.18)" }}
+    className="group flex flex-col gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
   >
-    <div className="w-14 h-14 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300 mx-auto">
+    <div className="w-12 h-12 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
       {contact.icon}
     </div>
     <div>
