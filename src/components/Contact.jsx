@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
+import { fadeIn } from "../utils/motion";
 
 const contacts = [
   { labelKey: "Email", value: "diego.jojoa@proton.me", href: "mailto:diego.jojoa@proton.me", icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>) },
@@ -13,27 +14,30 @@ const contacts = [
 const ContactCard = ({ contact, index }) => {
   const { t } = useTranslation();
   return (
-    <motion.a
-      href={contact.href} target="_blank" rel="noopener noreferrer"
-      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-      viewport={{ once: true }}
-      className="group flex flex-col items-center text-center gap-4 bg-jet rounded-2xl p-6 border border-white/5 hover:border-white/20 transition-colors duration-300 cursor-pointer"
-      initial={{ opacity: 0, y: 40, boxShadow: "0 0 0px 0px rgba(255,255,255,0)" }}
-      whileInView={{ opacity: 1, y: 0, boxShadow: "0 0 20px 3px rgba(255,255,255,0.09), 0 0 50px 10px rgba(255,255,255,0.04)" }}
-      whileHover={{ y: -8, boxShadow: "0 0 30px 8px rgba(255,255,255,0.15), 0 0 70px 20px rgba(255,255,255,0.07)", transition: { duration: 0.3 } }}
+    <motion.div
+      variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
+      className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card"
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
     >
-      <div className="w-12 h-12 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
-        {contact.icon}
-      </div>
-      <div>
-        <p className="text-taupe text-xs uppercase tracking-widest mb-1 font-poppins">{contact.labelKey}</p>
-        <p className="text-timberWolf font-medium text-sm leading-snug font-beckman tracking-[1px]">{contact.value}</p>
-      </div>
-      <div className="flex items-center gap-2 text-taupe text-xs group-hover:text-timberWolf transition-colors duration-300">
-        <span className="font-poppins">{t("contact.getInTouch")}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform duration-200"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-      </div>
-    </motion.a>
+      <a
+        href={contact.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group bg-jetLight rounded-[20px] py-5 px-8 min-h-[280px] flex justify-evenly items-center flex-col"
+      >
+        <div className="w-16 h-16 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe group-hover:text-timberWolf transition-colors duration-300">
+          {contact.icon}
+        </div>
+        <div className="text-center flex flex-col gap-1">
+          <p className="text-taupe text-xs uppercase tracking-widest font-poppins">{contact.labelKey}</p>
+          <p className="text-timberWolf font-bold text-[15px] leading-snug font-beckman tracking-[1px]">{contact.value}</p>
+        </div>
+        <div className="flex items-center gap-2 text-taupe text-xs group-hover:text-timberWolf transition-colors duration-300">
+          <span className="font-poppins">{t("contact.getInTouch")}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform duration-200"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </div>
+      </a>
+    </motion.div>
   );
 };
 
@@ -45,7 +49,7 @@ const Contact = () => {
         <h3 className={styles.sectionHeadTextLight}>{t("contact.title")}</h3>
         <p className="text-taupe mt-2 text-sm">{t("contact.subtitle")}</p>
       </motion.div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mt-4 flex flex-wrap gap-10">
         {contacts.map((contact, i) => (
           <ContactCard key={contact.labelKey} contact={contact} index={i} />
         ))}

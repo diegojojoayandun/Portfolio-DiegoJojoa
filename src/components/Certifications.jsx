@@ -69,23 +69,25 @@ const CertCard = ({ cert, onClick, index, animate }) => {
       animate={animate ? { opacity: 1, x: 0 } : undefined}
       transition={animate ? { type: "spring", duration: 0.75, delay: 0.08 * index } : undefined}
       exit={animate ? { opacity: 0, x: 60, transition: { duration: 0.3, delay: 0.05 * (index - 4) } } : undefined}
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
       onClick={() => onClick(cert)}
-      className="xs:w-[250px] w-full cursor-pointer rounded-[20px] p-5 flex flex-col gap-4 select-none border border-black/10 bg-white/80 shadow-card hover:shadow-lg transition-shadow duration-300"
+      className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card cursor-pointer select-none"
     >
-      <div className="w-11 h-11 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="12" y2="17" />
-        </svg>
+      <div className="bg-jetLight rounded-[20px] py-5 px-8 min-h-[280px] flex justify-evenly items-center flex-col">
+        <div className="w-16 h-16 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="12" y2="17" />
+          </svg>
+        </div>
+        <div className="text-center flex flex-col gap-1">
+          <h3 className="text-taupe text-[15px] font-bold text-center font-beckman tracking-[1px] leading-snug">{cert.title}</h3>
+          <p className="text-timberWolf text-xs font-poppins">{cert.issuer}</p>
+        </div>
+        <span className="inline-flex items-center gap-1 text-[11px] text-taupe bg-eerieBlack border border-white/10 rounded-full px-2.5 py-1 w-fit font-medium font-poppins">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+          {t("certifications.verified")}
+        </span>
       </div>
-      <div className="flex flex-col gap-1">
-        <p className="text-[#1a1a1a] font-semibold text-sm leading-snug font-beckman tracking-[1px]">{cert.title}</p>
-        <p className="text-[#555] text-xs font-poppins">{cert.issuer}</p>
-      </div>
-      <span className="inline-flex items-center gap-1 text-[11px] text-[#1a1a1a] bg-[#e8e8e8] border border-black/10 rounded-full px-2.5 py-1 w-fit font-medium">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-        {t("certifications.verified")}
-      </span>
     </motion.div>
   );
 };
@@ -133,7 +135,7 @@ const Certifications = () => {
         <h2 className="text-white font-bold text-4xl">{t("certifications.title")}</h2>
       </motion.div>
       <AnimatePresence>
-        <div className="mt-10 flex flex-wrap gap-7">
+        <div className="mt-10 flex flex-wrap gap-10">
           {visible.map((cert, i) => (
             <CertCard key={cert.fileName} cert={cert} onClick={setSelected} index={i} animate={i >= INITIAL_COUNT} />
           ))}

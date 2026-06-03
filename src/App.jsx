@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import {
   About,
@@ -12,16 +13,23 @@ import {
 } from "./components";
 
 import CustomCursor from "./components/CustomCursor";
+import PageLoader from "./components/PageLoader";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <BrowserRouter>
-      <CustomCursor />
-      <div className="relative z-0">
-        <div>
-          <Navbar />
-          <Hero />
-        </div>
+      {isLoading && <PageLoader onComplete={() => setIsLoading(false)} />}
+
+      {!isLoading && (
+        <>
+          <CustomCursor />
+          <div className="relative z-0">
+            <div>
+              <Navbar />
+              <Hero />
+            </div>
 
         <div className="bg-about bg-cover bg-center bg-no-repeat">
           <About />
@@ -55,6 +63,8 @@ const App = () => {
           <Footer />
         </div>
       </div>
+        </>
+      )}
     </BrowserRouter>
   );
 };
