@@ -71,7 +71,7 @@ const CertCard = ({ cert, onClick, index, animate }) => {
       exit={animate ? { opacity: 0, x: 60, transition: { duration: 0.3, delay: 0.05 * (index - 4) } } : undefined}
       whileHover={{ y: -8, transition: { duration: 0.2 } }}
       onClick={() => onClick(cert)}
-      className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-cardLight cursor-pointer select-none"
+      className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card cursor-pointer select-none"
     >
       <div className="bg-jetLight rounded-[20px] py-5 px-8 min-h-[280px] flex justify-evenly items-center flex-col">
         <div className="w-16 h-16 rounded-xl bg-eerieBlack flex items-center justify-center text-taupe">
