@@ -75,7 +75,7 @@ const Hero = ({ skipCurtains = false }) => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2.2, ease: "easeOut", delay: base + 0.05 }}>
-          <img className="absolute bottom-0 ml-[50vw] lg:ml-[75vw] md:ml-[60vw] xmd:ml-[60vw] 2xl:ml-[83vw] sm:h-[90vh] md:h-[70vh] xl:h-[80vh]" src={diego} alt="diegojojoa" />
+          <img className="absolute bottom-0 ml-[50vw] lg:ml-[75vw] md:ml-[60vw] xmd:ml-[60vw] 2xl:ml-[83vw] sm:h-[90vh] md:h-[70vh] xl:h-[80vh]" src={diego} alt="diegojojoa" fetchpriority="high" loading="eager" />
         </motion.div>
       </section>
     </>

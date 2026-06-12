@@ -6,7 +6,7 @@ import devblack from "./backgrounds/dev-black.png";
 import logo from "./logo/logo-black.png";
 import logotext from "./logo/logo-text-black.png";
 
-import diego from "./personal/diego.png";
+import diego from "./personal/diego.webp";
 
 import backend from "./icons/backend.png";
 import ux from "./icons/ux.png";
