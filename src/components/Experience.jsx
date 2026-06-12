@@ -43,7 +43,7 @@ const Experience = () => {
             icon={<div className="flex justify-center items-center w-full h-full"><img src={resume} alt="resume" className="w-[45%] h-[45%] object-contain" /></div>}
           >
             <button
-              className="live-demo flex justify-between sm:text-[18px] text-[14px] text-timberWolf font-bold font-beckman items-center py-5 pl-3 pr-3 whitespace-nowrap gap-1 sm:w-[148px] sm:h-[58px] w-[125px] h-[46px] rounded-[10px] bg-jetLight sm:mt-[22px] mt-[16px] hover:bg-battleGray hover:text-eerieBlack transition duration-[0.2s] ease-in-out"
+              className="live-demo flex justify-between sm:text-[18px] text-[14px] text-timberWolf font-bold font-beckman items-center py-5 pl-4 pr-4 whitespace-nowrap gap-2 sm:w-auto sm:h-[58px] w-auto h-[46px] rounded-[10px] bg-jetLight sm:mt-[22px] mt-[16px] hover:bg-battleGray hover:text-eerieBlack transition duration-[0.2s] ease-in-out"
               onClick={async () => {
                 const blobUrl = "https://8unuhnavu44egppp.public.blob.vercel-storage.com/CV_Diego_Fernando_Jojoa_2026.pdf";
                 try {
@@ -71,8 +71,10 @@ const Experience = () => {
           </VerticalTimelineElement>
 
           <VerticalTimelineElement
-            iconStyle={{ background: "#1a1a1a", border: "2px solid #888", boxShadow: "0 0 0 4px rgba(136,136,136,0.2)", width: "16px", height: "16px", marginLeft: "-8px", marginTop: "8px" }}
-            date={<span className="text-dim text-[14px] font-beckman tracking-[1px]">{t("experience.present")}</span>}
+            contentStyle={{ background: "transparent", boxShadow: "none" }}
+            contentArrowStyle={{ display: "none" }}
+            iconStyle={{ background: "#333333" }}
+            date={<div><h3 className="text-[#aaaaaa] text-[18px] font-bold font-beckman">{t("experience.present")}</h3></div>}
           />
         </VerticalTimeline>
       </div>
