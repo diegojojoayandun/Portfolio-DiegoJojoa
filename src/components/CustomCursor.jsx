@@ -20,17 +20,20 @@ const CustomCursor = () => {
       pos.current = { x: e.clientX, y: e.clientY };
       setVisible(true);
     };
-
     const over = (e) => {
       setHovering(!!e.target.closest("a, button, [role='button']"));
     };
+    const mouseDown = () => setClicking(true);
+    const mouseUp = () => setClicking(false);
+    const mouseLeave = () => setVisible(false);
+    const mouseEnter = () => setVisible(true);
 
     document.addEventListener("mousemove", move);
     document.addEventListener("mouseover", over);
-    document.addEventListener("mousedown", () => setClicking(true));
-    document.addEventListener("mouseup", () => setClicking(false));
-    document.addEventListener("mouseleave", () => setVisible(false));
-    document.addEventListener("mouseenter", () => setVisible(true));
+    document.addEventListener("mousedown", mouseDown);
+    document.addEventListener("mouseup", mouseUp);
+    document.addEventListener("mouseleave", mouseLeave);
+    document.addEventListener("mouseenter", mouseEnter);
 
     const tick = () => {
       ring.current.x += (pos.current.x - ring.current.x) * 0.12;
@@ -49,6 +52,10 @@ const CustomCursor = () => {
     return () => {
       document.removeEventListener("mousemove", move);
       document.removeEventListener("mouseover", over);
+      document.removeEventListener("mousedown", mouseDown);
+      document.removeEventListener("mouseup", mouseUp);
+      document.removeEventListener("mouseleave", mouseLeave);
+      document.removeEventListener("mouseenter", mouseEnter);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
@@ -57,7 +64,6 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Dot — sharp, exact */}
       <div
         ref={dotRef}
         style={{
@@ -67,7 +73,7 @@ const CustomCursor = () => {
           width: clicking ? "6px" : "8px",
           height: clicking ? "6px" : "8px",
           borderRadius: "50%",
-          background: hovering ? "#fff" : "#fff",
+          background: "#fff",
           pointerEvents: "none",
           zIndex: 2147483647,
           opacity: visible ? 1 : 0,
@@ -76,8 +82,6 @@ const CustomCursor = () => {
           mixBlendMode: "difference",
         }}
       />
-
-      {/* Ring — lagged */}
       <div
         ref={ringRef}
         style={{

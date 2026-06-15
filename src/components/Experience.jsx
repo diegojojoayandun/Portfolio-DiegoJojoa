@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -25,6 +26,7 @@ const ExperienceCard = ({ experience }) => (
 
 const Experience = () => {
   const { t } = useTranslation();
+  const downloadImgRef = useRef(null);
 
   return (
     <>
@@ -58,15 +60,15 @@ const Experience = () => {
                   a.click();
                   a.remove();
                   window.URL.revokeObjectURL(url);
-                } catch (error) {
-                  console.error("Error descargando:", error);
+                } catch {
+                  // silent fail — user sees no visual change
                 }
               }}
-              onMouseOver={() => document.querySelector(".download-btn").setAttribute("src", downloadHover)}
-              onMouseOut={() => document.querySelector(".download-btn").setAttribute("src", download)}
+              onMouseOver={() => { if (downloadImgRef.current) downloadImgRef.current.src = downloadHover; }}
+              onMouseOut={() => { if (downloadImgRef.current) downloadImgRef.current.src = download; }}
             >
               {t("experience.resume")}
-              <img src={download} alt="download" className="download-btn sm:w-[26px] sm:h-[26px] w-[23px] h-[23px] object-contain" />
+              <img ref={downloadImgRef} src={download} alt="download" className="sm:w-[26px] sm:h-[26px] w-[23px] h-[23px] object-contain" />
             </button>
           </VerticalTimelineElement>
 

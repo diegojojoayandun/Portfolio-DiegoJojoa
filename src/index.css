@@ -67,26 +67,6 @@ html, body {
   width: 70%;
 }
 
-#about {
-  margin-left: -24px;
-  font-size: 100px;
-}
-
-#projects {
-  margin-left: -2px;
-  font-size: 100px;
-}
-
-#contact {
-  margin-left: -20px;
-  font-size: 95px;
-  letter-spacing: -2px;
-}
-
-#footer {
-  margin-left: -24px;
-  font-size: 100px;
-}
 
 .hero-heading {
   font-family: "Poppins", sans-serif;
@@ -336,12 +316,6 @@ html, body {
 }
 
 @media (max-width: 640px) {
-  #projects,
-  #about,
-  #contact {
-    font-size: 80px;
-  }
-
   .menu {
     padding: 1rem;
   }
@@ -353,12 +327,6 @@ html, body {
 }
 
 @media (max-width: 450px) {
-  #projects,
-  #about,
-  #contact {
-    font-size: 70px;
-  }
-
   .menu {
     padding: 1rem;
   }
