@@ -42,25 +42,11 @@
 html, body {
   overflow-x: hidden;
   background-color: #0a0a0a;
-  scrollbar-width: thin;
-  scrollbar-color: #444 #0a0a0a;
+  scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #666;
+  display: none;
 }
 
 @media (pointer: fine) {
