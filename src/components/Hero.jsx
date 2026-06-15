@@ -37,10 +37,10 @@ const Hero = ({ skipCurtains = false }) => {
         </>
       )}
 
-      <motion.div className="absolute top-0 left-0 right-0 z-0 h-[100vh]" variants={fadeIn(0.1)} initial="initial" animate="animate">
+      <motion.div className="absolute top-0 left-0 z-0 h-[100vh] w-screen" variants={fadeIn(0.1)} initial="initial" animate="animate">
         <img src={devwhite} alt="background" className="w-full h-full sm:block hidden object-cover" />
       </motion.div>
-      <motion.div className="absolute top-0 left-0 right-0 z-0 h-[100vh]" variants={fadeIn(0.1)} initial="initial" animate="animate">
+      <motion.div className="absolute top-0 left-0 z-0 h-[100vh] w-screen" variants={fadeIn(0.1)} initial="initial" animate="animate">
         <img src={devblack} alt="background" className="w-full h-full sm:hidden block object-cover" />
       </motion.div>
 
