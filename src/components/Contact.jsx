@@ -44,7 +44,7 @@ const ContactCard = ({ contact, index }) => {
 const Contact = () => {
   const { t } = useTranslation();
   return (
-    <div className="-mt-[8rem] flex flex-col gap-10 overflow-hidden">
+    <div className="flex flex-col gap-10 overflow-hidden">
       <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} viewport={{ once: true }}>
         <h3 className={styles.sectionHeadTextLight}>{t("contact.title")}</h3>
         <p className="text-taupe mt-2 text-sm">{t("contact.subtitle")}</p>
