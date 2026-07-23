@@ -30,7 +30,7 @@ const About = () => {
   }));
 
   return (
-    <div className="-mt-[6rem]">
+    <div>
       <motion.div variants={textVariant()}>
         <h2 className={styles.sectionHeadText}>{t("about.title")}</h2>
       </motion.div>

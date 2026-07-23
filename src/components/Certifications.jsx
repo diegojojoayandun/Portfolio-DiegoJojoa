@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
+import { styles } from "../styles";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker?url";
 
@@ -129,10 +130,10 @@ const Certifications = () => {
   const visible = showAll ? certifications : certifications.slice(0, INITIAL_COUNT);
 
   return (
-    <div className="mt-[-2rem]">
+    <div>
       <motion.div variants={textVariant()}>
-        <p className="text-[#a09d9d] text-sm uppercase tracking-widest mb-1">{t("certifications.subtitle")}</p>
-        <h2 className="text-white font-bold text-4xl">{t("certifications.title")}</h2>
+        <p className={styles.sectionSubTextLight}>{t("certifications.subtitle")}</p>
+        <h2 className={styles.sectionHeadTextLight}>{t("certifications.title")}</h2>
       </motion.div>
       <AnimatePresence>
         <div className="mt-10 flex flex-wrap gap-10">

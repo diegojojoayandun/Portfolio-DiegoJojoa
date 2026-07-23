@@ -42,7 +42,7 @@ const Projects = () => {
   const [active, setActive] = useState("project-2");
 
   return (
-    <div className="-mt-[6rem]">
+    <div>
       <motion.div variants={textVariant()}>
         <h2 className={`${styles.sectionHeadTextLight}`}>{t("projects.title")}</h2>
       </motion.div>
